@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
 
-    <style name="AppBaseTheme" parent="android:Theme.NoTitleBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">@color/material_blue_500</item>-->
         <!--<item name="colorPrimaryDark">@color/material_blue_700</item>-->
