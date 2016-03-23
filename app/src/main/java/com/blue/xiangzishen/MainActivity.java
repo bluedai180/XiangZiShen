@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "navigation", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.openDrawer(mNavigationView);
             }
         });
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
