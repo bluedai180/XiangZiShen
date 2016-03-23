@@ -5,33 +5,47 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@mipmap/ic_launcher"
+            android:checkable="true"
             android:title="Home" />
         <item
             android:id="@+id/nav_messages"
             android:icon="@mipmap/ic_launcher"
-            android:title="Messages" />
+            android:checkable="true"
+            android:title="Find" />
         <item
             android:id="@+id/nav_friends"
             android:icon="@mipmap/ic_launcher"
-            android:title="Friends" />
+            android:checkable="true"
+            android:title="Map" />
         <item
             android:id="@+id/nav_discussion"
             android:icon="@mipmap/ic_launcher"
-            android:title="Discussion" />
+            android:checkable="true"
+            android:title="Message" />
+        <item
+            android:id="@+id/nav_radar"
+            android:icon="@mipmap/ic_launcher"
+            android:checkable="true"
+            android:title="Radar" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@mipmap/ic_launcher"
+            android:checkable="true"
+            android:title="Favorites" />
     </group>
 
-    <item android:title="Sub items">
+    <item android:title="Others">
         <menu>
             <item
                 android:icon="@mipmap/ic_launcher"
                 android:id="@+id/nav_night"
                 android:checkable="true"
-                android:title="Sub item 1" />
+                android:title="Night Mode" />
             <item
                 android:icon="@mipmap/ic_launcher"
                 android:id="@+id/nav_settings"
                 android:checkable="true"
-                android:title="Sub item 2" />
+                android:title="Settings" />
         </menu>
     </item>
 
