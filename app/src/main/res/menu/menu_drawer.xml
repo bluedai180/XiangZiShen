@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
             android:id="@+id/nav_home"
             android:icon="@mipmap/ic_launcher"
@@ -24,9 +24,13 @@
         <menu>
             <item
                 android:icon="@mipmap/ic_launcher"
+                android:id="@+id/nav_night"
+                android:checkable="true"
                 android:title="Sub item 1" />
             <item
                 android:icon="@mipmap/ic_launcher"
+                android:id="@+id/nav_settings"
+                android:checkable="true"
                 android:title="Sub item 2" />
         </menu>
     </item>

@@ -2,6 +2,9 @@ package com.blue.xiangzishen;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.service.carrier.CarrierService;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +13,8 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class MainActivity extends Activity {
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +22,29 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "navigation", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_discussion:
+                        Toast.makeText(MainActivity.this, "discussion", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
     }
