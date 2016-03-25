@@ -1,0 +1,1 @@
+1. NavigationView can not cover the status bar

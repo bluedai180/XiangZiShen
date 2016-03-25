@@ -1,0 +1,5 @@
+1. Add ToolBar (Done)
+2. Add NavigationView (Done)
+3. Add FloatButton
+4. Add Fragments to handle NavigationView options
+5. Add ViewPager and TabView

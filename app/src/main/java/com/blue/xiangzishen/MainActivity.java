@@ -2,7 +2,6 @@ package com.blue.xiangzishen;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.service.carrier.CarrierService;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -21,9 +20,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main_layout);
+        initToolBar();
+        initNavigationView();
+    }
+
+    private void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,12 @@ public class MainActivity extends Activity {
                 mDrawerLayout.openDrawer(mNavigationView);
             }
         });
+    }
+
+    private void initNavigationView() {
+        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
