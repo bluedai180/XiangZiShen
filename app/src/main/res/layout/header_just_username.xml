@@ -2,11 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="192dp"
-    android:background="?attr/colorPrimaryDark"
+    android:background="@color/material_blue_500"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
 
     <TextView
         android:id="@+id/id_link"
@@ -29,6 +28,5 @@
         android:layout_above="@id/id_username"
         android:layout_marginBottom="16dp"
         android:src="@mipmap/ic_launcher" />
-
 
 </RelativeLayout>

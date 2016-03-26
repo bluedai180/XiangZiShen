@@ -2,6 +2,7 @@ package com.blue.xiangzishen;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.Toolbar;
 public class MainActivity extends Activity {
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+    private FloatingActionButton mFloatingButtion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_layout);
         initToolBar();
         initNavigationView();
+        initFloatingButtion();
     }
 
     private void initToolBar() {
@@ -35,6 +38,15 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void initFloatingButtion() {
+        mFloatingButtion = (FloatingActionButton) findViewById(R.id.btn_floatting);
+        mFloatingButtion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "floatingbutton", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void initNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
