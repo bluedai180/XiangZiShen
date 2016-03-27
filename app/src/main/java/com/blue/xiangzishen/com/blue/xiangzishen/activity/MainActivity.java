@@ -1,10 +1,9 @@
-package com.blue.xiangzishen;
+package com.blue.xiangzishen.com.blue.xiangzishen.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -14,6 +13,7 @@ import android.view.Window;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.fragment.AboutFragment;
 import com.blue.xiangzishen.com.blue.xiangzishen.fragment.FavoritesFragment;
 import com.blue.xiangzishen.com.blue.xiangzishen.fragment.FindFragment;
