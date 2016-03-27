@@ -23,23 +23,7 @@
             android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btn_floatting"
-                android:layout_width="50dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right" />
-        </LinearLayout>
     </LinearLayout>
-
 
     <android.support.design.widget.NavigationView
         android:id="@+id/id_nv_menu"
@@ -49,7 +33,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_just_username"
         app:menu="@menu/menu_drawer" />
-
 
 </android.support.v4.widget.DrawerLayout>
 

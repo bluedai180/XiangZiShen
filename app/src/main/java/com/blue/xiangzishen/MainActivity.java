@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
-    private FloatingActionButton mFloatingButtion;
+
     private ArrayList<Fragment> fragmentArrayList;
     private Fragment mCurrentFragment;
 
@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_layout);
         initToolBar();
         initNavigationView();
-        initFloatingButtion();
         initFragment();
     }
 
@@ -51,16 +50,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 mDrawerLayout.openDrawer(mNavigationView);
-            }
-        });
-    }
-
-    private void initFloatingButtion() {
-        mFloatingButtion = (FloatingActionButton) findViewById(R.id.btn_floatting);
-        mFloatingButtion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "floatingbutton", Toast.LENGTH_SHORT).show();
             }
         });
     }
