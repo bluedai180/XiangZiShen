@@ -10,8 +10,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a4bda70-52df-4cd5-8376-f698a0d0c7ad" name="Default" comment="Change Todo_list&#10;&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Todo_list.txt" afterPath="$PROJECT_DIR$/Todo_list.txt" />
+    <list default="true" id="4a4bda70-52df-4cd5-8376-f698a0d0c7ad" name="Default" comment="Change Todo_list&#10;&#10;3. Add FloatButton (Done)&#10;4. Add Fragments to handle NavigationView options (Done)&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bug_list.txt" afterPath="$PROJECT_DIR$/Bug_list.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="XiangZiShen.iws" />
@@ -50,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Todo_list.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Todo_list.txt">
+      <file leaf-file-name="Bug_list.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Bug_list.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0890411">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.04452055">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -1559,6 +1559,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/blue/xiangzishen/com/blue/xiangzishen/fragment/SearchFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/blue/xiangzishen/MainActivity.java" />
         <option value="$PROJECT_DIR$/Todo_list.txt" />
+        <option value="$PROJECT_DIR$/Bug_list.txt" />
       </list>
     </option>
   </component>
@@ -1916,7 +1917,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459061789926</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Change Todo_list&#10;&#10;3. Add FloatButton (Done)&#10;4. Add Fragments to handle NavigationView options (Done)&#10;">
+      <created>1459062054175</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1459062054175</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2012,7 +2019,8 @@
     <MESSAGE value="Add Bug list and Todo list&#10;&#10;" />
     <MESSAGE value="Add FloatingActionButtion and change the Drawer background color&#10;&#10;" />
     <MESSAGE value="Add Fragments and handle transition&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Fragments and handle transition&#10;" />
+    <MESSAGE value="Change Todo_list&#10;&#10;3. Add FloatButton (Done)&#10;4. Add Fragments to handle NavigationView options (Done)&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change Todo_list&#10;&#10;3. Add FloatButton (Done)&#10;4. Add Fragments to handle NavigationView options (Done)&#10;" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -2186,13 +2194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bug_list.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2458,6 +2459,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Todo_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04452055">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/blue/xiangzishen/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2466,10 +2475,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Todo_list.txt">
+    <entry file="file://$PROJECT_DIR$/Bug_list.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0890411">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.04452055">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="47" />
           <folding />
         </state>
       </provider>

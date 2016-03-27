@@ -1,1 +1,2 @@
 1. NavigationView can not cover the status bar
+2. FloatActionButton is gone when add fragments
