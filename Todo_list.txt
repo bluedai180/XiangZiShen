@@ -3,3 +3,4 @@
 3. Add FloatButton (Done)
 4. Add Fragments to handle NavigationView options (Done)
 5. Add ViewPager and TabView
+6. Add login screen
