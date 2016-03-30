@@ -1,7 +1,7 @@
 package com.blue.xiangzishen.com.blue.xiangzishen.activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -23,7 +23,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
     private ViewPager mViewPager;
     private GuideAdapter mGuideAdapter;
-    private static int[] mImages = {R.drawable.guide_image1, R.drawable.guide_image2, R.drawable.guide_image3};
+    private static int[] mImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<ImageView> mImage_list;
     private ImageView[] mDotVIews;
 
@@ -35,6 +35,8 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         mViewPager = (ViewPager) findViewById(R.id.vp_guide);
 
         initImages();
+        initDotView();
+
         mGuideAdapter = new GuideAdapter(mImage_list);
         mViewPager.setAdapter(mGuideAdapter);
         mViewPager.setOnPageChangeListener(this);
@@ -54,22 +56,34 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(GuideActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(GuideActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
         }
     }
-//    private void initDotView(){
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_dot);
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        layoutParams.setMargins(10, 0, 10, 0);
-//        mDotVIews = new ImageView[mImages.length];
-//        for (int i = 0; i > mImages.length; i++){
-//            ImageView imageView = new ImageView(this);
-//        }
-//
-//    }
+
+    private void initDotView() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_dot);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10, 0, 10, 0);
+        mDotVIews = new ImageView[mImages.length];
+
+        for (int i = 0; i < mImages.length; i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setLayoutParams(layoutParams);
+            imageView.setImageResource(R.drawable.guide_point);
+            if (i == 0) {
+                imageView.setSelected(true);
+            } else {
+                imageView.setSelected(false);
+            }
+            mDotVIews[i] = imageView;
+            linearLayout.addView(imageView);
+        }
+
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -78,7 +92,13 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
     @Override
     public void onPageSelected(int position) {
-
+        for (int i = 0; i < mDotVIews.length; i++) {
+            if (position == i) {
+                mDotVIews[i].setSelected(true);
+            } else {
+                mDotVIews[i].setSelected(false);
+            }
+        }
     }
 
     @Override
