@@ -17,8 +17,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a4bda70-52df-4cd5-8376-f698a0d0c7ad" name="Default" comment="Change Todo_list&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Todo_list.txt" afterPath="$PROJECT_DIR$/Todo_list.txt" />
+    <list default="true" id="4a4bda70-52df-4cd5-8376-f698a0d0c7ad" name="Default" comment="Change Todo_list&#10;&#10;8. Add function in login and sign up screen">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="XiangZiShen.iws" />
@@ -2230,7 +2229,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459433717851</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Change Todo_list&#10;&#10;8. Add function in login and sign up screen">
+      <created>1459433902528</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1459433902528</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2334,7 +2339,8 @@
     <MESSAGE value="Add guide screens" />
     <MESSAGE value="Add buttongs in guide screens" />
     <MESSAGE value="Add sign and log in screens, with basic layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add sign and log in screens, with basic layout" />
+    <MESSAGE value="Change Todo_list&#10;&#10;8. Add function in login and sign up screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change Todo_list&#10;&#10;8. Add function in login and sign up screen" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
