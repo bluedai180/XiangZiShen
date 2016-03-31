@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
     private ViewPager mViewPager;
     private GuideAdapter mGuideAdapter;
+    private Button mLoginButton, mSignoutButton;
     private static int[] mImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<ImageView> mImage_list;
     private ImageView[] mDotVIews;
@@ -34,12 +36,33 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         setContentView(R.layout.activity_guide);
         mViewPager = (ViewPager) findViewById(R.id.vp_guide);
 
+        initButton();
         initImages();
         initDotView();
 
         mGuideAdapter = new GuideAdapter(mImage_list);
         mViewPager.setAdapter(mGuideAdapter);
         mViewPager.setOnPageChangeListener(this);
+    }
+
+    private void initButton() {
+        mLoginButton = (Button) findViewById(R.id.btn_login);
+        mSignoutButton = (Button) findViewById(R.id.btn_regist);
+
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GuideActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        mSignoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GuideActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initImages() {

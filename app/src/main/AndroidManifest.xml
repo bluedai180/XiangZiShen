@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".com.blue.xiangzishen.activity.LoginActivity" />
+        <activity android:name=".com.blue.xiangzishen.activity.SignUpActivity" />
     </application>
 
 </manifest>
