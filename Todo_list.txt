@@ -6,3 +6,4 @@
 6. Add login screen (Done)
 7. Add sign up screen (Done)
 8. Add function in login and sign up screen
+9. Add other ways to log in
