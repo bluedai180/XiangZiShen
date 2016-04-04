@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,17 +24,18 @@ import cn.bmob.v3.listener.FindListener;
  * Created by blue on 16-3-31.
  */
 public class LoginActivity extends Activity {
-    public static final String KEY = "157c6001fbee42fee6e1ff9f32444f9a";
+
     private Button mSignButton, mLoginButton;
     private EditText mUserEdit, mPwdEdit;
     private String mUserText, mPwdText;
     private User mUser;
     private int userflag, pwdflag;
+    private String userTextFlag, pwdTextFlag;
+    public static final String TAG = LoginActivity.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Bmob.initialize(this, KEY);
         mUser = new User();
         initView();
     }
@@ -50,7 +52,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                isLogin();
+                login();
             }
         });
         mSignButton.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +96,10 @@ public class LoginActivity extends Activity {
 
                 switch (edit.getId()) {
                     case R.id.et_username:
+                        userTextFlag = editable.toString();
                         break;
                     case R.id.et_password:
+                        pwdTextFlag = editable.toString();
                         break;
                 }
             }
@@ -114,15 +118,20 @@ public class LoginActivity extends Activity {
         mPwdText = mPwdEdit.getText().toString();
     }
 
-    private void isLogin() {
+    private void login() {
         BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereContains("username", mUserText);
-        query.addWhereContains("password", mPwdText);
+        query.addWhereEqualTo("name", mUserText);
+        //query.addWhereEqualTo("pwd", mPwdText);
+        //query.addWhereContains("name", mUserText);
+        //query.addWhereContains("pwd", mPwdText);
         query.findObjects(this, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
+                for (User user : list) {
+                    Log.i(TAG, user.getName());
+                    user.getPwd();
+                }
                 Toast.makeText(getApplicationContext(), "Log in successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
 
             @Override

@@ -17,6 +17,8 @@ import com.blue.xiangzishen.com.blue.xiangzishen.adapter.GuideAdapter;
 
 import java.util.ArrayList;
 
+import cn.bmob.v3.Bmob;
+
 /**
  * Created by blue on 16-3-28.
  */
@@ -28,6 +30,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     private static int[] mImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<ImageView> mImage_list;
     private ImageView[] mDotVIews;
+    public static final String KEY = "157c6001fbee42fee6e1ff9f32444f9a";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
         mViewPager = (ViewPager) findViewById(R.id.vp_guide);
-
+        Bmob.initialize(this, KEY);
         initButton();
         initImages();
         initDotView();
