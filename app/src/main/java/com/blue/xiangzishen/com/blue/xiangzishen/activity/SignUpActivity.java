@@ -28,8 +28,7 @@ public class SignUpActivity extends Activity {
     private Button mSignButton;
     private EditText mUserName, mPwd, mNumber;
     private String mUserNameText, mPwdText, mNumberText;
-    private boolean isEnable = false;
-    String username = null, pwd = null, number = null;
+    private int userflag, pwdflag, numberflag;
     private static final String TAG = SignUpActivity.class.getName();
     User mUser;
 
@@ -66,22 +65,30 @@ public class SignUpActivity extends Activity {
         edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                switch (edit.getId()) {
+                    case R.id.et_sign_username:
+                        break;
+                    case R.id.et_sign_pwd:
+                        break;
+                    case R.id.et_number:
+                        break;
+                }
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 switch (edit.getId()) {
                     case R.id.et_sign_username:
-                        if (i2 == 0) {
-                            mSignButton.setEnabled(false);
-                        }
+                        userflag = charSequence.length();
+                        setEnable();
                         break;
                     case R.id.et_number:
-                        Log.i(TAG, "" + i2);
+                        numberflag = charSequence.length();
+                        setEnable();
                         break;
                     case R.id.et_sign_pwd:
-                        Log.i(TAG, "" + i2);
+                        pwdflag = charSequence.length();
+                        setEnable();
                         break;
                 }
             }
@@ -91,40 +98,23 @@ public class SignUpActivity extends Activity {
 
                 switch (edit.getId()) {
                     case R.id.et_sign_username:
-                        username = editable.toString();
-                        if (username == null) {
-                            mSignButton.setEnabled(false);
-                        }
-                        Log.i(TAG, username);
                         break;
                     case R.id.et_sign_pwd:
-                        pwd = editable.toString();
-                        if (pwd == null) {
-                            mSignButton.setEnabled(false);
-                        }
-                        if (username != null && number != null && pwd != null) {
-                            mSignButton.setEnabled(true);
-                        }
-                        Log.i(TAG, pwd);
                         break;
                     case R.id.et_number:
-                        number = editable.toString();
-                        if (number == null) {
-                            mSignButton.setEnabled(false);
-                        }
-                        Log.i(TAG, number);
                         break;
                 }
             }
         });
     }
-//    private Boolean isEnable(){
-//        if (mNumberText != null && mUserNameText != null){
-//            Log.i(TAG, mNumberText + mUserNameText);
-//            return true;
-//        }
-//        return false;
-//    }
+
+    private void setEnable() {
+        if (numberflag != 0 && pwdflag != 0 && userflag != 0) {
+            mSignButton.setEnabled(true);
+        } else {
+            mSignButton.setEnabled(false);
+        }
+    }
 
     private void getEdit() {
         mUserNameText = mUserName.getText().toString();

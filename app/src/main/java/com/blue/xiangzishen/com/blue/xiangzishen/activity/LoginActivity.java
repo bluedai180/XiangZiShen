@@ -3,6 +3,8 @@ package com.blue.xiangzishen.com.blue.xiangzishen.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class LoginActivity extends Activity {
     private EditText mUserEdit, mPwdEdit;
     private String mUserText, mPwdText;
     private User mUser;
+    private int userflag, pwdflag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +40,12 @@ public class LoginActivity extends Activity {
 
     private void initView() {
         mLoginButton = (Button) findViewById(R.id.btn_login);
+        mLoginButton.setEnabled(false);
         mSignButton = (Button) findViewById(R.id.btn_sign);
         mUserEdit = (EditText) findViewById(R.id.et_username);
         mPwdEdit = (EditText) findViewById(R.id.et_password);
+        listenEdit(mUserEdit);
+        listenEdit(mPwdEdit);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +62,53 @@ public class LoginActivity extends Activity {
         });
     }
 
+    private void listenEdit(final EditText edit) {
+
+        edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                switch (edit.getId()) {
+                    case R.id.et_username:
+                        break;
+                    case R.id.et_password:
+                        break;
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                switch (edit.getId()) {
+                    case R.id.et_username:
+                        userflag = charSequence.length();
+                        setEnable();
+                        break;
+                    case R.id.et_password:
+                        pwdflag = charSequence.length();
+                        setEnable();
+                        break;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                switch (edit.getId()) {
+                    case R.id.et_username:
+                        break;
+                    case R.id.et_password:
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setEnable() {
+        if (pwdflag != 0 && userflag != 0) {
+            mLoginButton.setEnabled(true);
+        } else {
+            mLoginButton.setEnabled(false);
+        }
+    }
     private void getEdit() {
         mUserText = mUserEdit.getText().toString();
         mPwdText = mPwdEdit.getText().toString();

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -56,6 +58,26 @@ public class CheckSMSActivity extends Activity {
         mVerify = (Button) findViewById(R.id.btn_verification);
         mVerify.setEnabled(false);
         mCode = (EditText) findViewById(R.id.et_code);
+        mCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() != 0) {
+                    mVerify.setEnabled(true);
+                } else {
+                    mVerify.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         mNumber.setText(mPhoneNamber);
         mVerify.setOnClickListener(new View.OnClickListener() {
             @Override
