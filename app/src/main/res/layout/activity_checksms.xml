@@ -26,6 +26,8 @@
 
         <EditText
             android:id="@+id/et_code"
+            android:maxLength="6"
+            android:numeric="integer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -37,6 +39,7 @@
 
     <Button
         android:id="@+id/btn_verification"
+        android:text="Verify code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
