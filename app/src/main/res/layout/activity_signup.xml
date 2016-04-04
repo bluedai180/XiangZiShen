@@ -26,12 +26,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="password"
+            android:text="Mobile number:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/et_sign_pwd"
+            android:id="@+id/et_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -42,12 +42,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="confirm password"
+            android:text="password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/et_confirm_pwd"
+            android:id="@+id/et_sign_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
