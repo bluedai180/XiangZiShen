@@ -19,6 +19,7 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by blue on 16-3-31.
@@ -120,23 +121,29 @@ public class LoginActivity extends Activity {
 
     private void login() {
         BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereEqualTo("name", mUserText);
-        //query.addWhereEqualTo("pwd", mPwdText);
-        //query.addWhereContains("name", mUserText);
-        //query.addWhereContains("pwd", mPwdText);
+        query.addWhereContains("name", mUserText);
         query.findObjects(this, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                for (User user : list) {
-                    Log.i(TAG, user.getName());
-                    user.getPwd();
+                if (list.size() > 0 && list != null) {
+                    for (User user : list) {
+                        String pwd = user.getPwd();
+                        if (pwd == pwdTextFlag) {
+                            Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "The user does not exist", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getApplicationContext(), "Log in successful", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(getApplicationContext(), "Wrong info" + s, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "faild" + s);
             }
         });
     }
