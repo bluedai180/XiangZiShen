@@ -16,9 +16,15 @@ import android.widget.Toast;
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.RequestSMSCodeListener;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -54,8 +60,8 @@ public class SignUpActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                sendRequestCode();
-                checkSMSCode();
+                checkUserName();
+
             }
         });
     }
@@ -120,16 +126,53 @@ public class SignUpActivity extends Activity {
         mUserNameText = mUserName.getText().toString();
         mPwdText = mPwd.getText().toString();
         mNumberText = mNumber.getText().toString();
+    }
+
+    private void addUser() {
         mUser.setName(mUserNameText);
         mUser.setPwd(mPwdText);
+        mUser.setPhone(mNumberText);
         mUser.save(this, new SaveListener() {
             @Override
             public void onSuccess() {
             }
+
             @Override
             public void onFailure(int i, String s) {
             }
         });
+    }
+
+    private void checkUserName() {
+        BmobQuery<User> query = new BmobQuery<User>();
+        query.addWhereEqualTo("name", mUserNameText);
+        query.findObjects(this, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                if (list.size() > 0 && list != null) {
+                    Toast.makeText(getApplicationContext(), "The user name has already used", Toast.LENGTH_SHORT).show();
+                } else {
+                    checkPhone(mNumberText);
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    private void checkPhone(String phone) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(phone);
+        if (m.matches()) {
+            addUser();
+            //sendRequestCode();
+            checkSMSCode();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void sendRequestCode() {
