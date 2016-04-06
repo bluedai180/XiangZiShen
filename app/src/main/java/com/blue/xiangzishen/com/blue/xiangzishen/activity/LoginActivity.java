@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -55,7 +56,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                checkPhone();
+                setLoginMode(mUserText);
             }
         });
         mSignButton.setOnClickListener(new View.OnClickListener() {
@@ -121,15 +122,11 @@ public class LoginActivity extends Activity {
         mPwdText = mPwdEdit.getText().toString();
     }
 
-    private void checkPhone() {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(mUserText);
-        if (m.matches()) {
+    private void setLoginMode(String text) {
+        if (Utils.isPhoneNamber(text)) {
             loginWithPhone();
-            Log.i(TAG, "phone");
         } else {
             loginWithName();
-            Log.i(TAG, "name");
         }
     }
 

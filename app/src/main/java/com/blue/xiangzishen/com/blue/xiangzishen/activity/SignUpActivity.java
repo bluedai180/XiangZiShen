@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -152,7 +153,13 @@ public class SignUpActivity extends Activity {
                 if (list.size() > 0 && list != null) {
                     Toast.makeText(getApplicationContext(), "The user name has already used", Toast.LENGTH_SHORT).show();
                 } else {
-                    checkPhone(mNumberText);
+                    if (Utils.isPhoneNamber(mNumberText)) {
+                        addUser();
+                        //sendRequestCode();
+                        checkSMSCode();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -161,18 +168,6 @@ public class SignUpActivity extends Activity {
 
             }
         });
-    }
-
-    private void checkPhone(String phone) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(phone);
-        if (m.matches()) {
-            addUser();
-            //sendRequestCode();
-            checkSMSCode();
-        } else {
-            Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void sendRequestCode() {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.adapter.GuideAdapter;
+import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,6 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     private static int[] mImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<ImageView> mImage_list;
     private ImageView[] mDotVIews;
-    public static final String KEY = "157c6001fbee42fee6e1ff9f32444f9a";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
         mViewPager = (ViewPager) findViewById(R.id.vp_guide);
-        Bmob.initialize(this, KEY);
+        Bmob.initialize(this, Utils.BMOB_APP_KEY);
         initButton();
         initImages();
         initDotView();
