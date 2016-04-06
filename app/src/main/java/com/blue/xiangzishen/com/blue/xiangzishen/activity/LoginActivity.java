@@ -142,9 +142,7 @@ public class LoginActivity extends Activity {
                 if (list.size() > 0 && list != null) {
                     for (User user : list) {
                         String pwd = user.getPwd();
-                        if (pwd == mPwdText) {
-                            Log.i(TAG, "pwd is" + pwd);
-                            Log.i(TAG, "flag is" + pwdTextFlag);
+                        if (pwd.equals(pwdTextFlag)) {
                             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_SHORT).show();
@@ -171,7 +169,8 @@ public class LoginActivity extends Activity {
                 if (list.size() > 0 && list != null) {
                     for (User user : list) {
                         String pwd = user.getPwd();
-                        if (pwd == pwdTextFlag) {
+                        Log.i(TAG, pwd + pwdTextFlag);
+                        if (pwd.equals(pwdTextFlag)) {
                             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_SHORT).show();
