@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                login();
+                AccountManager.login(LoginActivity.this, mUserText, mPwdText);
             }
         });
         mSignButton.setOnClickListener(new View.OnClickListener() {
@@ -120,18 +121,5 @@ public class LoginActivity extends Activity {
     private void getEdit() {
         mUserText = mUserEdit.getText().toString();
         mPwdText = mPwdEdit.getText().toString();
-    }
-
-    private void login() {
-        BmobUser.loginByAccount(this, mUserText, mPwdText, new LogInListener<User>() {
-            @Override
-            public void done(User user, BmobException e) {
-                if (user != null) {
-                    Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "The phone number or password is wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 }

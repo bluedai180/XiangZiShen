@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.SMSManager;
 
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
@@ -104,30 +106,11 @@ public class CheckSMSActivity extends Activity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    sign();
+                    AccountManager.sign(CheckSMSActivity.this, mUserText, mPwdText, mPhoneNamber);
                 } else {
                     mTimer.onFinish();
                     Toast.makeText(getApplicationContext(), "The request code is wrong", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-    }
-
-    private void sign() {
-        Log.i("bluedai", "sign" + mUserText + mPwdText + mPhoneNamber);
-        mUser.setUsername(mUserText);
-        mUser.setPassword(mPwdText);
-        mUser.setMobilePhoneNumber(mPhoneNamber);
-        mUser.setMobilePhoneNumberVerified(true);
-        mUser.signUp(this, new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -146,23 +129,11 @@ public class CheckSMSActivity extends Activity {
                 mTime.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        resendRequestCode();
+                        SMSManager.sendRequestCode(CheckSMSActivity.this, mPhoneNamber);
                     }
                 });
             }
         };
         mTimer.start();
-    }
-
-    private void resendRequestCode() {
-        BmobSMS.requestSMSCode(this, mPhoneNamber, "注册", new RequestSMSCodeListener() {
-            @Override
-            public void done(Integer integer, BmobException e) {
-                if (e == null) {
-                    Log.i(TAG, "resend successful, SMS id : " + integer);
-                    Toast.makeText(CheckSMSActivity.this, "send SMS code successful", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 }

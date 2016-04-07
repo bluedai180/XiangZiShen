@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.SMSManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
@@ -128,20 +129,10 @@ public class SignUpActivity extends Activity {
             intent.putExtra("name", mUserNameText);
             intent.putExtra("password", mPwdText);
             intent.putExtra("phone", mNumberText);
-            sendRequestCode();
+            SMSManager.sendRequestCode(SignUpActivity.this, mNumberText);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
         }
-    }
-    private void sendRequestCode() {
-        BmobSMS.requestSMSCode(this, mNumberText, "注册", new RequestSMSCodeListener() {
-            @Override
-            public void done(Integer integer, BmobException e) {
-                if (e == null) {
-                    Log.i(TAG, "SMS id : " + integer);
-                }
-            }
-        });
     }
 }
