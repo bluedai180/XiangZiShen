@@ -15,11 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
+import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.RequestSMSCodeListener;
 import cn.bmob.sms.listener.VerifySMSCodeListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by blue on 16-4-4.
@@ -28,15 +30,17 @@ public class CheckSMSActivity extends Activity {
     private TextView mNumber, mTime;
     private Button mVerify;
     private EditText mCode;
-    private String mPhoneNamber, mCodeText;
+    private String mUserText, mPwdText, mPhoneNamber, mCodeText;
     private CountDownTimer mTimer;
+    private User mUser;
     public static final String TAG = CheckSMSActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checksms);
-        getNumber();
+        mUser = new User();
+        getInfo();
         initView();
         countdown();
     }
@@ -88,8 +92,11 @@ public class CheckSMSActivity extends Activity {
         });
     }
 
-    private void getNumber() {
-        mPhoneNamber = getIntent().getStringExtra("number");
+    private void getInfo() {
+        mUserText = getIntent().getStringExtra("name");
+        mPwdText = getIntent().getStringExtra("password");
+        mPhoneNamber = getIntent().getStringExtra("phone");
+        Log.i("bluedai", mUserText + mPwdText + mPhoneNamber);
     }
 
     private void checkCode() {
@@ -97,11 +104,30 @@ public class CheckSMSActivity extends Activity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    Log.i(TAG, "verify success");
-                    startActivity(new Intent(CheckSMSActivity.this, MainActivity.class));
+                    sign();
                 } else {
-                    Log.i(TAG, "verify failed " + e);
+                    mTimer.onFinish();
+                    Toast.makeText(getApplicationContext(), "The request code is wrong", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void sign() {
+        Log.i("bluedai", "sign" + mUserText + mPwdText + mPhoneNamber);
+        mUser.setUsername(mUserText);
+        mUser.setPassword(mPwdText);
+        mUser.setMobilePhoneNumber(mPhoneNamber);
+        mUser.setMobilePhoneNumberVerified(true);
+        mUser.signUp(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -3,8 +3,6 @@ package com.blue.xiangzishen.com.blue.xiangzishen.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.annotation.CheckResult;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,8 +16,6 @@ import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
@@ -37,13 +33,11 @@ public class SignUpActivity extends Activity {
     private String mUserNameText, mPwdText, mNumberText;
     private int userflag, pwdflag, numberflag;
     private static final String TAG = SignUpActivity.class.getName();
-    User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        mUser = new User();
         initView();
     }
 
@@ -61,8 +55,7 @@ public class SignUpActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                checkUserName();
-
+                sendRequestSMSCode();
             }
         });
     }
@@ -129,47 +122,18 @@ public class SignUpActivity extends Activity {
         mNumberText = mNumber.getText().toString();
     }
 
-    private void addUser() {
-        mUser.setName(mUserNameText);
-        mUser.setPwd(mPwdText);
-        mUser.setPhone(mNumberText);
-        mUser.save(this, new SaveListener() {
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-            }
-        });
+    private void sendRequestSMSCode() {
+        if (Utils.isPhoneNamber(mNumberText)) {
+            Intent intent = new Intent(SignUpActivity.this, CheckSMSActivity.class);
+            intent.putExtra("name", mUserNameText);
+            intent.putExtra("password", mPwdText);
+            intent.putExtra("phone", mNumberText);
+            sendRequestCode();
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    private void checkUserName() {
-        BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereEqualTo("name", mUserNameText);
-        query.findObjects(this, new FindListener<User>() {
-            @Override
-            public void onSuccess(List<User> list) {
-                if (list.size() > 0 && list != null) {
-                    Toast.makeText(getApplicationContext(), "The user name has already used", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (Utils.isPhoneNamber(mNumberText)) {
-                        addUser();
-                        //sendRequestCode();
-                        checkSMSCode();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please input right phone number", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-        });
-    }
-
     private void sendRequestCode() {
         BmobSMS.requestSMSCode(this, mNumberText, "注册", new RequestSMSCodeListener() {
             @Override
@@ -179,11 +143,5 @@ public class SignUpActivity extends Activity {
                 }
             }
         });
-    }
-
-    private void checkSMSCode() {
-        Intent intent = new Intent(SignUpActivity.this, CheckSMSActivity.class);
-        intent.putExtra("number", mNumberText);
-        startActivity(intent);
     }
 }

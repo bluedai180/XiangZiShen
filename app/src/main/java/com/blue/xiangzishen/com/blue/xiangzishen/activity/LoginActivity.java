@@ -16,13 +16,13 @@ import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by blue on 16-3-31.
@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 getEdit();
-                setLoginMode(mUserText);
+                login();
             }
         });
         mSignButton.setOnClickListener(new View.OnClickListener() {
@@ -122,65 +122,15 @@ public class LoginActivity extends Activity {
         mPwdText = mPwdEdit.getText().toString();
     }
 
-    private void setLoginMode(String text) {
-        if (Utils.isPhoneNamber(text)) {
-            loginWithPhone();
-        } else {
-            loginWithName();
-        }
-    }
-
-    private void loginWithPhone() {
-        BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereEqualTo("phone", mUserText);
-        query.findObjects(this, new FindListener<User>() {
+    private void login() {
+        BmobUser.loginByAccount(this, mUserText, mPwdText, new LogInListener<User>() {
             @Override
-            public void onSuccess(List<User> list) {
-                if (list.size() > 0 && list != null) {
-                    for (User user : list) {
-                        String pwd = user.getPwd();
-                        if (pwd.equals(pwdTextFlag)) {
-                            Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+            public void done(User user, BmobException e) {
+                if (user != null) {
+                    Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "The user does not exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "The phone number or password is wrong", Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-        });
-    }
-
-    private void loginWithName() {
-        BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereContains("name", mUserText);
-        query.findObjects(this, new FindListener<User>() {
-            @Override
-            public void onSuccess(List<User> list) {
-                if (list.size() > 0 && list != null) {
-                    for (User user : list) {
-                        String pwd = user.getPwd();
-                        Log.i(TAG, pwd + pwdTextFlag);
-                        if (pwd.equals(pwdTextFlag)) {
-                            Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "The user does not exist", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                Log.i(TAG, "faild" + s);
             }
         });
     }
