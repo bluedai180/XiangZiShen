@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.List;
@@ -28,7 +29,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by blue on 16-3-31.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements StateListener {
 
     private Button mSignButton, mLoginButton;
     private EditText mUserEdit, mPwdEdit;
@@ -36,13 +37,20 @@ public class LoginActivity extends Activity {
     private User mUser;
     private int userflag, pwdflag;
     private String userTextFlag, pwdTextFlag;
+    AccountManager mAccount;
     public static final String TAG = LoginActivity.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mUser = new User();
+        initObject();
         initView();
+    }
+
+    private void initObject() {
+        mUser = new User();
+        mAccount = new AccountManager();
+        mAccount.setListener(this);
     }
 
     private void initView() {
@@ -121,5 +129,16 @@ public class LoginActivity extends Activity {
     private void getEdit() {
         mUserText = mUserEdit.getText().toString();
         mPwdText = mPwdEdit.getText().toString();
+    }
+
+    @Override
+    public void getState(String mode, boolean successful) {
+        if (mode == AccountManager.MODE_LOGIN) {
+            if (successful) {
+                Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "The phone number or password is wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

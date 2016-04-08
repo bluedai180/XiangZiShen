@@ -14,15 +14,26 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by blue on 16-4-7.
  */
 public class AccountManager {
+    public static StateListener mState;
+    public static final String MODE_LOGIN = "login";
+    public static final String MODE_SIGN = "sign";
+
+    public void setListener(StateListener state) {
+        this.mState = state;
+    }
 
     public static void login(final Context context, String user, String pwd) {
         BmobUser.loginByAccount(context, user, pwd, new LogInListener<User>() {
             @Override
             public void done(User user, BmobException e) {
                 if (user != null) {
-                    Toast.makeText(context.getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+                    if (mState != null) {
+                        mState.getState(MODE_LOGIN, true);
+                    }
                 } else {
-                    Toast.makeText(context.getApplicationContext(), "The phone number or password is wrong", Toast.LENGTH_SHORT).show();
+                    if (mState != null) {
+                        mState.getState(MODE_LOGIN, false);
+                    }
                 }
             }
         });
@@ -37,12 +48,16 @@ public class AccountManager {
         myUser.signUp(context, new SaveListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(context.getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+                if (mState != null) {
+                    mState.getState(MODE_SIGN, true);
+                }
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(context.getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                if (mState != null) {
+                    mState.getState(MODE_SIGN, false);
+                }
             }
         });
     }

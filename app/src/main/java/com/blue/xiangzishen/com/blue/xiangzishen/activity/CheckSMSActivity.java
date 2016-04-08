@@ -18,6 +18,7 @@ import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.SMSManager;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
@@ -28,7 +29,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by blue on 16-4-4.
  */
-public class CheckSMSActivity extends Activity {
+public class CheckSMSActivity extends Activity implements StateListener {
     private TextView mNumber, mTime;
     private Button mVerify;
     private EditText mCode;
@@ -135,5 +136,16 @@ public class CheckSMSActivity extends Activity {
             }
         };
         mTimer.start();
+    }
+
+    @Override
+    public void getState(String mode, boolean successful) {
+        if (mode == AccountManager.MODE_SIGN) {
+            if (successful) {
+                Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "The phone number has already signed", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
