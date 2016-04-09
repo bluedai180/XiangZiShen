@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -14,6 +15,10 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.adapter.GuideAdapter;
+import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.SearchUserListener;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 
 import java.util.ArrayList;
@@ -23,7 +28,7 @@ import cn.bmob.v3.Bmob;
 /**
  * Created by blue on 16-3-28.
  */
-public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
+public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener, SearchUserListener {
 
     private ViewPager mViewPager;
     private GuideAdapter mGuideAdapter;
@@ -31,6 +36,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     private static int[] mImages = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
     private ArrayList<ImageView> mImage_list;
     private ImageView[] mDotVIews;
+    AccountManager mAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,9 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         initButton();
         initImages();
         initDotView();
+        mAccount = new AccountManager();
+        mAccount.setUserListener(this);
+        AccountManager.getCurrentUser(GuideActivity.this);
 
         mGuideAdapter = new GuideAdapter(mImage_list);
         mViewPager.setAdapter(mGuideAdapter);
@@ -130,5 +139,15 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void getUser(User user) {
+        if (user != null) {
+            String name = user.getUsername();
+            Intent intent = new Intent(GuideActivity.this, MainActivity.class);
+            //startActivity(intent);
+        } else {
+        }
     }
 }

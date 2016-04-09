@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
@@ -33,6 +34,7 @@ public class LoginActivity extends Activity implements StateListener {
 
     private Button mSignButton, mLoginButton;
     private EditText mUserEdit, mPwdEdit;
+    private TextView mForget;
     private String mUserText, mPwdText;
     private User mUser;
     private int userflag, pwdflag;
@@ -59,6 +61,13 @@ public class LoginActivity extends Activity implements StateListener {
         mSignButton = (Button) findViewById(R.id.btn_sign);
         mUserEdit = (EditText) findViewById(R.id.et_username);
         mPwdEdit = (EditText) findViewById(R.id.et_password);
+        mForget = (TextView) findViewById(R.id.tv_forget);
+        mForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         listenEdit(mUserEdit);
         listenEdit(mPwdEdit);
         mLoginButton.setOnClickListener(new View.OnClickListener() {

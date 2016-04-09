@@ -15,11 +15,17 @@ import cn.bmob.v3.listener.SaveListener;
  */
 public class AccountManager {
     public static StateListener mState;
+    public static SearchUserListener mUser;
     public static final String MODE_LOGIN = "login";
     public static final String MODE_SIGN = "sign";
+    public static final String MODE_GET_CURRENT = "current_user";
 
     public void setListener(StateListener state) {
         this.mState = state;
+    }
+
+    public void setUserListener(SearchUserListener user) {
+        this.mUser = user;
     }
 
     public static void login(final Context context, String user, String pwd) {
@@ -60,5 +66,13 @@ public class AccountManager {
                 }
             }
         });
+    }
+
+    public static void getCurrentUser(Context content) {
+        User user = BmobUser.getCurrentUser(content, User.class);
+        user.getObjectId();
+        if (mUser != null) {
+            mUser.getUser(user);
+        }
     }
 }
