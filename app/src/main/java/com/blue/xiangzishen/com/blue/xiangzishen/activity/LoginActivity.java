@@ -133,12 +133,10 @@ public class LoginActivity extends Activity implements StateListener {
 
     @Override
     public void getState(String mode, boolean successful) {
-        if (mode == AccountManager.MODE_LOGIN) {
             if (successful) {
                 Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "The phone number or password is wrong", Toast.LENGTH_SHORT).show();
             }
-        }
     }
 }

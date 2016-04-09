@@ -15,30 +15,35 @@ import cn.bmob.sms.listener.VerifySMSCodeListener;
 public class SMSManager {
 
     public static final String TAG = SMSManager.class.getName();
+    public static final String MODEL_SEND_SMS_CODE = "send_code";
+    public static final String MODEL_CHECK_SMS_CODE = "verify_code";
+    static StateListener mState;
+
+    public void setListener(StateListener state) {
+        this.mState = state;
+    }
 
     public static void sendRequestCode(final Context context, String phone) {
         BmobSMS.requestSMSCode(context, phone, "注册", new RequestSMSCodeListener() {
             @Override
             public void done(Integer integer, BmobException e) {
                 if (e == null) {
-                    Log.i(TAG, "SMS id : " + integer);
-                    Toast.makeText(context.getApplicationContext(), "Send SMS code successful", Toast.LENGTH_SHORT).show();
+                    mState.getState(MODEL_SEND_SMS_CODE, true);
                 }
             }
         });
     }
 
-//    public static void checkCode(Context context, String phone, String code){
-//        BmobSMS.verifySmsCode(context, phone, code, new VerifySMSCodeListener() {
-//            @Override
-//            public void done(BmobException e) {
-//                if (e == null) {
-//                    sign();
-//                } else {
-//                    mTimer.onFinish();
-//                    Toast.makeText(getApplicationContext(), "The request code is wrong", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//    }
+    public static void checkCode(Context context, String phone, String code) {
+        BmobSMS.verifySmsCode(context, phone, code, new VerifySMSCodeListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    mState.getState(MODEL_CHECK_SMS_CODE, true);
+                } else {
+                    mState.getState(MODEL_CHECK_SMS_CODE, false);
+                }
+            }
+        });
+    }
 }

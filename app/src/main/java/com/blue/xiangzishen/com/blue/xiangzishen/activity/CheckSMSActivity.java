@@ -36,6 +36,8 @@ public class CheckSMSActivity extends Activity implements StateListener {
     private String mUserText, mPwdText, mPhoneNamber, mCodeText;
     private CountDownTimer mTimer;
     private User mUser;
+    AccountManager mAccount;
+    SMSManager mSMS;
     public static final String TAG = CheckSMSActivity.class.getName();
 
     @Override
@@ -43,6 +45,10 @@ public class CheckSMSActivity extends Activity implements StateListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checksms);
         mUser = new User();
+        mAccount = new AccountManager();
+        mSMS = new SMSManager();
+        mAccount.setListener(this);
+        mSMS.setListener(this);
         getInfo();
         initView();
         countdown();
@@ -90,7 +96,7 @@ public class CheckSMSActivity extends Activity implements StateListener {
             @Override
             public void onClick(View view) {
                 mCodeText = mCode.getText().toString();
-                checkCode();
+                SMSManager.checkCode(CheckSMSActivity.this, mPhoneNamber, mCodeText);
             }
         });
     }
@@ -99,21 +105,6 @@ public class CheckSMSActivity extends Activity implements StateListener {
         mUserText = getIntent().getStringExtra("name");
         mPwdText = getIntent().getStringExtra("password");
         mPhoneNamber = getIntent().getStringExtra("phone");
-        Log.i("bluedai", mUserText + mPwdText + mPhoneNamber);
-    }
-
-    private void checkCode() {
-        BmobSMS.verifySmsCode(this, mPhoneNamber, mCodeText, new VerifySMSCodeListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    AccountManager.sign(CheckSMSActivity.this, mUserText, mPwdText, mPhoneNamber);
-                } else {
-                    mTimer.onFinish();
-                    Toast.makeText(getApplicationContext(), "The request code is wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void countdown() {
@@ -140,12 +131,28 @@ public class CheckSMSActivity extends Activity implements StateListener {
 
     @Override
     public void getState(String mode, boolean successful) {
-        if (mode == AccountManager.MODE_SIGN) {
-            if (successful) {
-                Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "The phone number has already signed", Toast.LENGTH_SHORT).show();
-            }
+        switch (mode) {
+            case SMSManager.MODEL_CHECK_SMS_CODE:
+                if (successful) {
+                    AccountManager.sign(this, mUserText, mPwdText, mPhoneNamber);
+                    Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+                } else {
+                    mTimer.onFinish();
+                    Toast.makeText(getApplicationContext(), "The code is wrong", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case SMSManager.MODEL_SEND_SMS_CODE:
+                if (successful) {
+                    Toast.makeText(getApplicationContext(), "Send SMS code successful", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case AccountManager.MODE_SIGN:
+                if (successful) {
+                    Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "The phone number has already signed", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 }
