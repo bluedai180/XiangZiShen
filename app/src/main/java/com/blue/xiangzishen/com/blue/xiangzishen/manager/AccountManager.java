@@ -1,14 +1,21 @@
 package com.blue.xiangzishen.com.blue.xiangzishen.manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.blue.xiangzishen.com.blue.xiangzishen.bean.User;
 
+import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by blue on 16-4-7.
@@ -18,7 +25,8 @@ public class AccountManager {
     public static SearchUserListener mUser;
     public static final String MODE_LOGIN = "login";
     public static final String MODE_SIGN = "sign";
-    public static final String MODE_GET_CURRENT = "current_user";
+    public static final String MODE_SEARCH_USER = "search_user";
+    public static final String MODEL_RESET_PWD = "reset_pwd";
 
     public void setListener(StateListener state) {
         this.mState = state;
@@ -74,5 +82,43 @@ public class AccountManager {
         if (mUser != null) {
             mUser.getUser(user);
         }
+    }
+
+    public static void searchUser(Context context, String key, String value) {
+        BmobQuery<BmobUser> query = new BmobQuery<BmobUser>();
+        query.addWhereEqualTo(key, value);
+        query.findObjects(context, new FindListener<BmobUser>() {
+            @Override
+            public void onSuccess(List<BmobUser> list) {
+                if (list.isEmpty()) {
+                    mState.getState(MODE_SEARCH_USER, false);
+                } else {
+                    mState.getState(MODE_SEARCH_USER, true);
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    public static void resetPwd(Context context, String value) {
+        User user = new User();
+        user.setPassword(value);
+        user.update(context, "b7ff9b5081", new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                mState.getState(MODEL_RESET_PWD, true);
+                Log.i("bluedai", "reset successful");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+
     }
 }

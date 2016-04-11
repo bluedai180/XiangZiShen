@@ -8,6 +8,8 @@ import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.RequestSMSCodeListener;
 import cn.bmob.sms.listener.VerifySMSCodeListener;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.ResetPasswordByCodeListener;
 
 /**
  * Created by blue on 16-4-7.
@@ -17,6 +19,7 @@ public class SMSManager {
     public static final String TAG = SMSManager.class.getName();
     public static final String MODEL_SEND_SMS_CODE = "send_code";
     public static final String MODEL_CHECK_SMS_CODE = "verify_code";
+    public static final String MODEL_CHECK_FORGET_CODE = "forget_code";
     static StateListener mState;
 
     public void setListener(StateListener state) {
@@ -42,6 +45,19 @@ public class SMSManager {
                     mState.getState(MODEL_CHECK_SMS_CODE, true);
                 } else {
                     mState.getState(MODEL_CHECK_SMS_CODE, false);
+                }
+            }
+        });
+    }
+
+    public static void resetPassword(Context context, String phone, String code) {
+        BmobUser.resetPasswordBySMSCode(context, code, phone, new ResetPasswordByCodeListener() {
+            @Override
+            public void done(cn.bmob.v3.exception.BmobException e) {
+                if (e == null) {
+                    mState.getState(MODEL_CHECK_FORGET_CODE, true);
+                } else {
+                    mState.getState(MODEL_CHECK_FORGET_CODE, false);
                 }
             }
         });

@@ -27,6 +27,8 @@
         <activity android:name=".com.blue.xiangzishen.activity.LoginActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.SignUpActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.CheckSMSActivity" />
+        <activity android:name=".com.blue.xiangzishen.activity.ForgetActivity" />
+        <activity android:name=".com.blue.xiangzishen.activity.ResetPwdActivity" />
     </application>
 
 </manifest>
