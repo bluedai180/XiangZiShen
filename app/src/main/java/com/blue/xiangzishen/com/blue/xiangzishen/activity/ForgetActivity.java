@@ -15,12 +15,6 @@ import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.SMSManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 
-import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.FindListener;
-
 /**
  * Created by blue on 16-4-10.
  */
@@ -29,13 +23,16 @@ public class ForgetActivity extends Activity implements StateListener {
     private TextInputLayout mTextInputLayout;
     private Button mButton;
     AccountManager mAccount;
+    SMSManager mSMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
         mAccount = new AccountManager();
+        mSMS = new SMSManager();
         mAccount.setListener(this);
+        mSMS.setListener(this);
         initView();
     }
 
@@ -53,16 +50,16 @@ public class ForgetActivity extends Activity implements StateListener {
 
     @Override
     public void getState(String mode, boolean isSuccessful) {
-        if (mode == AccountManager.MODE_SEARCH_USER) {
-            if (isSuccessful) {
-                Intent intent = new Intent(ForgetActivity.this, CheckSMSActivity.class);
-                intent.putExtra("phone", mPhoneNumber.getText().toString());
-                intent.putExtra("mode", "forget");
-                startActivity(intent);
-                SMSManager.sendRequestCode(this, mPhoneNumber.getText().toString());
-            } else {
-                Toast.makeText(getApplicationContext(), "This phone number is not exist", Toast.LENGTH_SHORT).show();
-            }
+        switch (mode) {
+            case AccountManager.MODE_SEARCH_USER:
+                if (isSuccessful) {
+                    Intent intent = new Intent(ForgetActivity.this, ResetPwdActivity.class);
+                    startActivity(intent);
+                    SMSManager.sendRequestCode(this, mPhoneNumber.getText().toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "This phone number is not exist", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 }

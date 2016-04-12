@@ -28,6 +28,18 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tl_code">
+
+        <EditText
+            android:id="@+id/et_reset_code"
+            android:hint="Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/btn_reset"
         android:text="Reset"

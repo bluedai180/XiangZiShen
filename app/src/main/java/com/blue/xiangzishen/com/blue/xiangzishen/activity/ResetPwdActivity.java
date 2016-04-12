@@ -9,22 +9,23 @@ import android.widget.Toast;
 
 import com.blue.xiangzishen.R;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.AccountManager;
+import com.blue.xiangzishen.com.blue.xiangzishen.manager.SMSManager;
 import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 
 /**
  * Created by blue on 16-4-11.
  */
 public class ResetPwdActivity extends Activity implements StateListener {
-    private EditText mNewPwd, mConfirmPwd;
+    private EditText mNewPwd, mConfirmPwd, mCode;
     private Button mReset;
-    AccountManager mAccount;
+    SMSManager mSMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget);
-        mAccount = new AccountManager();
-        mAccount.setListener(this);
+        setContentView(R.layout.activity_reset);
+        mSMS = new SMSManager();
+        mSMS.setListener(this);
         initView();
     }
 
@@ -32,20 +33,28 @@ public class ResetPwdActivity extends Activity implements StateListener {
         mReset = (Button) findViewById(R.id.btn_reset);
         mNewPwd = (EditText) findViewById(R.id.et_new_pwd);
         mConfirmPwd = (EditText) findViewById(R.id.et_confirm_pwd);
+        mCode = (EditText) findViewById(R.id.et_reset_code);
         mReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountManager.resetPwd(ResetPwdActivity.this, mConfirmPwd.getText().toString());
+                SMSManager.resetPassword(ResetPwdActivity.this, mCode.getText().toString(), mConfirmPwd.getText().toString());
             }
         });
     }
 
     @Override
     public void getState(String mode, boolean isSuccessful) {
-        if (mode == AccountManager.MODEL_RESET_PWD) {
-            if (isSuccessful) {
-                Toast.makeText(getApplicationContext(), "Reset password successful", Toast.LENGTH_SHORT).show();
-            }
+        switch (mode) {
+            case SMSManager.MODEL_CHECK_FORGET_CODE:
+                if (isSuccessful) {
+                    Toast.makeText(getApplicationContext(), "Change password successful!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case SMSManager.MODEL_SEND_SMS_CODE:
+                if (isSuccessful) {
+                    Toast.makeText(getApplicationContext(), "Send code successful", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 }

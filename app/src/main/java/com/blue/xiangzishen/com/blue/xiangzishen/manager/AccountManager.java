@@ -103,22 +103,4 @@ public class AccountManager {
             }
         });
     }
-
-    public static void resetPwd(Context context, String value) {
-        User user = new User();
-        user.setPassword(value);
-        user.update(context, "b7ff9b5081", new UpdateListener() {
-            @Override
-            public void onSuccess() {
-                mState.getState(MODEL_RESET_PWD, true);
-                Log.i("bluedai", "reset successful");
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-
-            }
-        });
-
-    }
 }

@@ -33,7 +33,7 @@ public class CheckSMSActivity extends Activity implements StateListener {
     private TextView mNumber, mTime;
     private Button mVerify;
     private EditText mCode;
-    private String mUserText, mPwdText, mPhoneNamber, mCodeText, mMode;
+    private String mUserText, mPwdText, mPhoneNamber, mCodeText;
     private CountDownTimer mTimer;
     private User mUser;
     AccountManager mAccount;
@@ -96,25 +96,15 @@ public class CheckSMSActivity extends Activity implements StateListener {
             @Override
             public void onClick(View view) {
                 mCodeText = mCode.getText().toString();
-                if (mMode.equals("forget")) {
-                    SMSManager.resetPassword(CheckSMSActivity.this, mPhoneNamber, mCodeText);
-                } else {
-                    SMSManager.checkCode(CheckSMSActivity.this, mPhoneNamber, mCodeText);
-                }
+                SMSManager.checkCode(CheckSMSActivity.this, mPhoneNamber, mCodeText);
             }
         });
     }
 
     private void getInfo() {
-        mMode = getIntent().getStringExtra("mode");
-
-        if (mMode == "forget") {
-            mPhoneNamber = getIntent().getStringExtra("phone");
-        } else {
-            mUserText = getIntent().getStringExtra("name");
-            mPwdText = getIntent().getStringExtra("password");
-            mPhoneNamber = getIntent().getStringExtra("phone");
-        }
+        mUserText = getIntent().getStringExtra("name");
+        mPwdText = getIntent().getStringExtra("password");
+        mPhoneNamber = getIntent().getStringExtra("phone");
     }
 
     private void countdown() {
@@ -163,13 +153,6 @@ public class CheckSMSActivity extends Activity implements StateListener {
                     Toast.makeText(getApplicationContext(), "The phone number has already signed", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case SMSManager.MODEL_CHECK_FORGET_CODE:
-                if (successful) {
-                    Intent intent = new Intent(CheckSMSActivity.this, ResetPwdActivity.class);
-                    startActivity(intent);
-                } else {
-
-                }
         }
     }
 }

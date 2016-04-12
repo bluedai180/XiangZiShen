@@ -50,8 +50,8 @@ public class SMSManager {
         });
     }
 
-    public static void resetPassword(Context context, String phone, String code) {
-        BmobUser.resetPasswordBySMSCode(context, code, phone, new ResetPasswordByCodeListener() {
+    public static void resetPassword(Context context, String code, String password) {
+        BmobUser.resetPasswordBySMSCode(context, code, password, new ResetPasswordByCodeListener() {
             @Override
             public void done(cn.bmob.v3.exception.BmobException e) {
                 if (e == null) {
