@@ -7,4 +7,4 @@
 7. Add sign up screen (Done)
 8. Add function in login and sign up screen (Done)
 9. Add other ways to log in
-10. Use RxJava and MVP
+10. Use RxJava and MVP in build.gradle
