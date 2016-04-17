@@ -124,7 +124,7 @@ public class SignUpActivity extends Activity {
     }
 
     private void sendRequestSMSCode() {
-        if (Utils.isPhoneNamber(mNumberText)) {
+        if (Utils.isPhoneNumber(mNumberText)) {
             Intent intent = new Intent(SignUpActivity.this, CheckSMSActivity.class);
             intent.putExtra("name", mUserNameText);
             intent.putExtra("password", mPwdText);

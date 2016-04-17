@@ -26,6 +26,7 @@ public class SMSManager {
         this.mState = state;
     }
 
+    // Send request code for sign up.
     public static void sendRequestCode(final Context context, String phone) {
         BmobSMS.requestSMSCode(context, phone, "注册", new RequestSMSCodeListener() {
             @Override
@@ -37,6 +38,7 @@ public class SMSManager {
         });
     }
 
+    // Check code from Bmob
     public static void checkCode(Context context, String phone, String code) {
         BmobSMS.verifySmsCode(context, phone, code, new VerifySMSCodeListener() {
             @Override
@@ -50,6 +52,7 @@ public class SMSManager {
         });
     }
 
+    // Check to reset pwd.
     public static void resetPassword(Context context, String code, String password) {
         BmobUser.resetPasswordBySMSCode(context, code, password, new ResetPasswordByCodeListener() {
             @Override

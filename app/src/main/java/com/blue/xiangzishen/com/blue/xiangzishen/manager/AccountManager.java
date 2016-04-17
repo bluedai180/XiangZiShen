@@ -36,6 +36,7 @@ public class AccountManager {
         this.mUser = user;
     }
 
+    // Account log in.
     public static void login(final Context context, String user, String pwd) {
         BmobUser.loginByAccount(context, user, pwd, new LogInListener<User>() {
             @Override
@@ -53,6 +54,7 @@ public class AccountManager {
         });
     }
 
+    // Account sign up.
     public static void sign(final Context context, String user, String pwd, String phone) {
         User myUser = new User();
         myUser.setUsername(user);
@@ -76,6 +78,7 @@ public class AccountManager {
         });
     }
 
+    // Get current user from local.
     public static void getCurrentUser(Context content) {
         User user = BmobUser.getCurrentUser(content, User.class);
         user.getObjectId();
@@ -84,6 +87,7 @@ public class AccountManager {
         }
     }
 
+    // Check if the user existed.
     public static void searchUser(Context context, String key, String value) {
         BmobQuery<BmobUser> query = new BmobQuery<BmobUser>();
         query.addWhereEqualTo(key, value);
