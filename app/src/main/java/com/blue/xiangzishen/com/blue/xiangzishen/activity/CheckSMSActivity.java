@@ -28,6 +28,8 @@ import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by blue on 16-4-4.
+ *
+ * Check code when sign up.
  */
 public class CheckSMSActivity extends Activity implements StateListener {
     private TextView mNumber, mTime;

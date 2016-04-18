@@ -14,6 +14,8 @@ import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 
 /**
  * Created by blue on 16-4-11.
+ *
+ * If check code is successful, then reset password.
  */
 public class ResetPwdActivity extends Activity implements StateListener {
     private EditText mNewPwd, mConfirmPwd, mCode;

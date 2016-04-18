@@ -17,6 +17,8 @@ import com.blue.xiangzishen.com.blue.xiangzishen.manager.StateListener;
 
 /**
  * Created by blue on 16-4-10.
+ *
+ * Forget the password and resign.
  */
 public class ForgetActivity extends Activity implements StateListener {
     private EditText mPhoneNumber;

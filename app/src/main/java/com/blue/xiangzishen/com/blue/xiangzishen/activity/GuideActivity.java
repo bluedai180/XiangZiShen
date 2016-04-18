@@ -27,6 +27,8 @@ import cn.bmob.v3.Bmob;
 
 /**
  * Created by blue on 16-3-28.
+ *
+ * Only run once at the first time, if there is one user, don`t run.
  */
 public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener, SearchUserListener {
 
