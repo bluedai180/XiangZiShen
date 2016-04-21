@@ -30,7 +30,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by blue on 16-3-31.
  *
- * Login screen.
+ * Login screen change.
  */
 public class LoginActivity extends Activity implements StateListener {
 
