@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class LoginActivity extends Activity implements StateListener {
     private Button mSignButton, mLoginButton;
     private EditText mUserEdit, mPwdEdit;
     private TextView mForget;
+    private ImageView mWeiXin, mWeiBo, mQQ;
     private String mUserText, mPwdText;
     private User mUser;
     private int userflag, pwdflag;
@@ -63,6 +65,27 @@ public class LoginActivity extends Activity implements StateListener {
         mSignButton = (Button) findViewById(R.id.btn_sign);
         mUserEdit = (EditText) findViewById(R.id.et_username);
         mPwdEdit = (EditText) findViewById(R.id.et_password);
+        mWeiXin = (ImageView) findViewById(R.id.iv_weixin);
+        mWeiBo = (ImageView) findViewById(R.id.iv_weibo);
+        mQQ = (ImageView) findViewById(R.id.iv_qq);
+        mWeiXin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        mWeiBo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        mQQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
         mForget = (TextView) findViewById(R.id.tv_forget);
         mForget.setOnClickListener(new View.OnClickListener() {
             @Override
