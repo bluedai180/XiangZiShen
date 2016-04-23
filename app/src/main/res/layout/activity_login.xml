@@ -85,5 +85,28 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_weixin"
+            android:src="@drawable/ic_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_weibo"
+            android:src="@drawable/ic_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_qq"
+            android:src="@drawable/ic_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 </LinearLayout>
