@@ -9,3 +9,4 @@
 9. Add other ways to log in
 10. Use RxJava and MVP in build.gradle
 11. Add wrong information to show for user.
+12. Use ShareSDK to sign third app.
