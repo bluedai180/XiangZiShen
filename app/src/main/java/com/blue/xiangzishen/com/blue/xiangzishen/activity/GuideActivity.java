@@ -1,6 +1,7 @@
 package com.blue.xiangzishen.com.blue.xiangzishen.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,10 @@ import com.blue.xiangzishen.com.blue.xiangzishen.utils.Utils;
 import java.util.ArrayList;
 
 import cn.bmob.v3.Bmob;
+import rx.Observable;
+import rx.Observer;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by blue on 16-3-28.

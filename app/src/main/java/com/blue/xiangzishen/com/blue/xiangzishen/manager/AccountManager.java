@@ -81,7 +81,9 @@ public class AccountManager {
     // Get current user from local.
     public static void getCurrentUser(Context content) {
         User user = BmobUser.getCurrentUser(content, User.class);
-        user.getObjectId();
+        if (user != null) {
+            user.getObjectId();
+        }
         if (mUser != null) {
             mUser.getUser(user);
         }

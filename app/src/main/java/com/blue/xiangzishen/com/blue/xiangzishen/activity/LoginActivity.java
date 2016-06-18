@@ -83,7 +83,7 @@ public class LoginActivity extends Activity implements StateListener {
         mQQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
             }
         });
         mForget = (TextView) findViewById(R.id.tv_forget);

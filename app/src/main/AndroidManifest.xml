@@ -16,19 +16,21 @@
         <activity
             android:name=".com.blue.xiangzishen.activity.MainActivity"
             android:label="@string/app_name" >
-        </activity>
-        <activity android:name=".com.blue.xiangzishen.activity.GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".com.blue.xiangzishen.activity.GuideActivity">
+
+        </activity>
         <activity android:name=".com.blue.xiangzishen.activity.LoginActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.SignUpActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.CheckSMSActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.ForgetActivity" />
         <activity android:name=".com.blue.xiangzishen.activity.ResetPwdActivity" />
+        <activity android:name=".com.blue.xiangzishen.activity.NewEditorActivity" />
     </application>
 
 </manifest>

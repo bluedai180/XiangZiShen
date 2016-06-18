@@ -78,6 +78,7 @@
             android:text="Forget Password"
             android:id="@+id/tv_forget"
             android:layout_marginRight="10dp"
+            android:textColor="#0000FF"
             android:layout_marginTop="10dp"
             android:layout_alignParentRight="true"
             android:enabled="true"
